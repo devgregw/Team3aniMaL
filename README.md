@@ -15,8 +15,10 @@ The focus of this project is to build a model that classifies six different anim
 - Horses
 - Spiders
 
-The model will also feature a front-end built for android so that users may either upload/ take photos to be classified by the model. 
-
+The model will also feature a front-end built for android so that users may either upload/ take photos to be classified by the model. The images used in this project for classification are obtained through google images using a web crawler and from the following sources:
+- https://www.kaggle.com/alessiocorrado99/animals10
+- https://dl.allaboutbirds.org/merlin---computer-vision--terms-of-use?submissionGuid=e49e295c-a9ca-465b-9810-97c0f3a10b4e
+- https://www.kaggle.com/c/dogs-vs-cats
 ## Files Included
 ### keras_model
 - ml_basic_plaidml.py: trains a model with a plaidml backend with Keras support
@@ -26,3 +28,11 @@ The model will also feature a front-end built for android so that users may eith
 - ml_h5_to_tflite.py: converts a Keras h5 file to a tflite file 
 - ml_image_resize.py: resizes images in a directory
 - ml_basic_visual.png: a picture showing the model architecture
+
+## Model
+The model implemented within the app is built upon the VGG16 pretrained model. It was able to obtain a validation accuracy above 95% and testing accuracy above 85%
+
+## Tools Used
+- PlaidML: a very useful library that enables the usage of AMD GPUs and much others that are unsupported by tensorflow. Used to speed up training.
+- AdvancedRenamer: useful for renaming large batches of files
+- IfranView: also useful for renaming, but also good for image cropping, and converting batches of images to a single file type
