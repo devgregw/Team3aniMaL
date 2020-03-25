@@ -22,6 +22,7 @@ The images used in this project for classification are obtained mainly through g
 - https://dl.allaboutbirds.org/merlin---computer-vision--terms-of-use?submissionGuid=e49e295c-a9ca-465b-9810-97c0f3a10b4e
 - https://www.kaggle.com/c/dogs-vs-cats
 - http://www.vision.caltech.edu/visipedia/CUB-200-2011.html
+
 Over 60,000 photos were obtained (unbalanced) for the classification process. For the balanced dataset, there were 36,000 images meaning 6,000 for each animal. The data was split 80/20 for validation.
 
 ## Files Included
