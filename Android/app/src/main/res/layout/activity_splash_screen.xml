@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <ImageButton
+    tools:context=".SplashScreenActivity">
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:id="@+id/progress_circular"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="48dp"
-        android:src="@drawable/baseline_camera_enhance_black_48"
-        android:tint="@android:color/white"
-        android:layout_centerInParent="true"
-        android:background="@drawable/image_button_round"
-        android:elevation="8dp"
-        android:foreground="@drawable/ripple_forground"/>
+        android:layout_below="@id/progress_circular"
+        android:layout_centerHorizontal="true"
+        android:text="Loading"/>
 </RelativeLayout>

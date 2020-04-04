@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "77940059655",
+    "firebase_url": "https://team-3-animal.firebaseio.com",
+    "project_id": "team-3-animal",
+    "storage_bucket": "team-3-animal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77940059655:android:d09726e24138f47ad904a2",
+        "android_client_info": {
+          "package_name": "dev.gregwhatley.cse3310.team3animal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77940059655-2hoovljj8mfiu6t298r9lk8j25sgfcbm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0bYp6rkpDpJ-DOYOj1a4umOxu8iqOMQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77940059655-2hoovljj8mfiu6t298r9lk8j25sgfcbm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Team 3 aniMaL</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="register">Register</string>
 </resources>
