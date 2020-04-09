@@ -23,7 +23,7 @@ class LogInActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val dialog = ProgressDialog(this).apply {
-                title = "Logging in..."
+                setMessage("Logging in...")
                 show()
             }
             val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

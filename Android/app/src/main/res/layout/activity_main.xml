@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:theme="@style/AppTheme">
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,5 +15,6 @@
         android:layout_centerInParent="true"
         android:background="@drawable/image_button_round"
         android:elevation="8dp"
-        android:foreground="@drawable/ripple_forground"/>
+        android:foreground="@drawable/ripple_forground"
+        android:id="@+id/capture_button"/>
 </RelativeLayout>

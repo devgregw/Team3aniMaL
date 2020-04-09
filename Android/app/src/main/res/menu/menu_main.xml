@@ -6,7 +6,7 @@
         android:id="@+id/log_out"
         android:icon="@drawable/baseline_phonelink_lock_24"
         android:title="Log Out"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/account"
         android:icon="@drawable/baseline_account_circle_24"
