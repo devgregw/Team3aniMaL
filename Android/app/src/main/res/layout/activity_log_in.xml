@@ -49,9 +49,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:weightSum="1"
+            style="?attr/buttonBarStyle">
 
             <Button
+                style="?attr/buttonBarButtonStyle"
                 android:id="@+id/log_in"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -59,18 +61,18 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="0.5"
-                android:backgroundTint="@color/colorAccent"
-                android:text="@string/log_in"
-                android:textColor="@android:color/primary_text_dark" />
+                android:text="@string/log_in" />
 
             <Button
+                style="?attr/buttonBarNeutralButtonStyle"
                 android:id="@+id/register"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_weight="0.5"
-                android:text="@string/register" />
+                android:text="@string/register"
+                android:textColor="@android:color/primary_text_dark" />
 
         </LinearLayout>
 

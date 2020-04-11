@@ -31,26 +31,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                android:layout_marginStart="16dp"/>
                 android:text="@string/is_this_classification_correct"
+                android:layout_marginStart="16dp"
+                android:textAlignment="center"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:paddingTop="8dp">
+                android:paddingTop="8dp"
+                android:layout_gravity="center"
+                style="?attr/buttonBarStyle">
                 <Button
+                    style="?attr/buttonBarPositiveButtonStyle"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorAccent"
                     android:text="@string/yes"
                     android:id="@+id/sheet_button_correct"/>
                 <Button
+                    style="?attr/buttonBarNegativeButtonStyle"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sheet_button_incorrect"/>
                     android:text="@string/no"
+                    android:id="@+id/sheet_button_incorrect"
+                    android:textColor="@android:color/white"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
