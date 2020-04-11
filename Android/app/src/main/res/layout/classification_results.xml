@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:title="Classificiation"
+        app:title="Classification"
         android:id="@+id/bottom_sheet_toolbar"
         app:menu="@menu/menu_bottom_sheet"/>
 
