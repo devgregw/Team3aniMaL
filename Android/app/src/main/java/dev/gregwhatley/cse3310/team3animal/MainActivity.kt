@@ -119,6 +119,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        title = "Home"
         classifier = Classifier(this)
         bottomSheetDialog = BottomSheetDialog(this).apply {
             setContentView(R.layout.classification_results)

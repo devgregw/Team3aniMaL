@@ -17,6 +17,7 @@ class LogInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
+        setTitle(R.string.app_full_name)
         log_in.setOnClickListener {
             if (email_address.text.isEmpty() or password.text.isEmpty()) {
                 Snackbar.make(root,"An email address and password is required to log in.", Snackbar.LENGTH_LONG).show()

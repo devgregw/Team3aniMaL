@@ -61,6 +61,7 @@ class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        setTitle(R.string.app_full_name)
         if (checkPermission())
             next()
         else requestPermission()
