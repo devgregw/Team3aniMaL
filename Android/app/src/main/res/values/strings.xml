@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">Team 3 aniMaL</string>
+    <string name="app_name">aniMaL</string>
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
     <string name="log_in">Log in</string>
     <string name="register">Register</string>
+    <string name="app_full_name">Team 3 aniMaL</string>
+    <string name="is_this_classification_correct">Is this classification correct?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 </resources>

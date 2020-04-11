@@ -31,8 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                android:text="Is this classification correct?"
                 android:layout_marginStart="16dp"/>
+                android:text="@string/is_this_classification_correct"
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,13 +44,13 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorAccent"
-                    android:text="YES"
+                    android:text="@string/yes"
                     android:id="@+id/sheet_button_correct"/>
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="NO"
                     android:id="@+id/sheet_button_incorrect"/>
+                    android:text="@string/no"
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
