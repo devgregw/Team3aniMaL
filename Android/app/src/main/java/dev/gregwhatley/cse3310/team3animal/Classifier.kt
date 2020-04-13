@@ -26,14 +26,14 @@ import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import kotlin.collections.HashMap
 
-class Classifier(val activity: AppCompatActivity) {
+class Classifier(private val activity: AppCompatActivity) {
     private val interpreter: Interpreter
     private val executorService = Executors.newCachedThreadPool()
     private val labels = arrayOf("bird", "butterfly", "cat", "dog", "horse", "spider")
     private val inputWidth: Int
     private val inputHeight: Int
     private val imageMean = 127.5f
-    private val imageStd = 127.5f
+    private val imageStdDev = 127.5f
     private var photoPath: String? = null
 
     companion object {
@@ -51,28 +51,29 @@ class Classifier(val activity: AppCompatActivity) {
         inputHeight = interpreter.getInputTensor(0).shape()[2]
     }
 
-    private fun convertBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
-        val buffer = ByteBuffer.allocateDirect(4*128*128*3)
-        buffer.order(ByteOrder.nativeOrder())
-        val pixels = IntArray(inputWidth * inputHeight)
-        bitmap.getPixels(pixels, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
-        var pixel = 0
-        for (i in 0 until inputWidth)
-            for (j in 0 until inputHeight)
-                buffer.apply {
-                    val pixelVal = pixels[pixel++]
-                    putFloat(((pixelVal shr 16 and 0xFF) - imageMean) / imageStd)
-                    putFloat(((pixelVal shr 8 and 0xFF) - imageMean) / imageStd)
-                    putFloat(((pixelVal and 0xFF) - imageMean) / imageStd)
-                }
-        bitmap.recycle()
-        return buffer
-    }
-
     private fun classifyWorker(): SortedMap<Float, String> {
-        val tImg = ImageProcessor.Builder().add(ResizeOp(128, 128, ResizeOp.ResizeMethod.BILINEAR)).build().process(TensorImage(DataType.UINT8).apply { load(BitmapFactory.decodeFile(photoPath!!)) })
-        val output = Array(1) {FloatArray(6)}
-        interpreter.run(convertBitmapToByteBuffer(tImg.bitmap), output)
+        // Create an image processor to resize and normalize the image.
+        val processor = ImageProcessor.Builder()
+            .add(ResizeOp(inputHeight, inputWidth, ResizeOp.ResizeMethod.BILINEAR))
+            .add(NormalizeOp(imageMean, imageStdDev))
+            .build()
+
+        // Create a tensor image of type UInt8
+        var tensorImage = TensorImage(DataType.UINT8)
+
+        // Load captured photo
+        tensorImage.load(BitmapFactory.decodeFile(photoPath!!))
+
+        // Process the photo
+        tensorImage = processor.process(tensorImage)
+
+        // Create model output array.
+        val output = Array(1) {FloatArray(labels.size)}
+
+        // Classify photo with model
+        interpreter.run(tensorImage.buffer, output)
+
+        // Return a sorted map of probabilities to labels
         val outputMap: HashMap<Float, String> = HashMap()
         output[0].forEachIndexed { index, fl ->
             outputMap[fl] = labels[index]
