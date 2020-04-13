@@ -8,6 +8,11 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import load_model
 
+#import plaidml
+#from plaidml import keras
+#from keras.preprocessing.image import ImageDataGenerator
+#from keras.models import load_model
+
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -29,7 +34,7 @@ def findIndex(array):
     return index
 
 # Directory if images to be processed
-PREDICT_DIR = '_128/predict_animals2'
+PREDICT_DIR = '_128/predict_animals'
 labels = ['bird', 'butterfly','cat', 'dog', 'horse', 'spider']
 
 target_dim = 128
@@ -38,7 +43,7 @@ target_size = (target_dim, target_dim)
 #--------------------------------------------------------------------------------------------------------------------------------
 # Model Predictions
 #--------------------------------------------------------------------------------------------------------------------------------
-model = load_model('Models/ml_basic_plaidml_binary_98.h5')
+model = load_model('ml_basic_tf_acc.h5')
 
 # Used to predict each image
 for image in listdir(PREDICT_DIR):

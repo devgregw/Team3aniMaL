@@ -3,7 +3,11 @@
 # Description: Used to train and produce model with a tensorflow backend
 import os
 from os import listdir
+IMAGE_DIR ='C:\\Users\\jonah_000\\Dropbox'
+os.chdir(IMAGE_DIR)
+path = os.getcwd()
 
+print(path)
 # Enable AMD GPU usage w/ Keras
 #import plaidml
 #from plaidml import keras
@@ -25,11 +29,11 @@ from tensorflow.keras.losses import binary_crossentropy, categorical_crossentrop
 # batch_size: the number of photos in a batch
 
 # Directories for images
-TRAIN_DIR='_128/balanced_train_animals'
-VAL_DIR='_128/balanced_val_animals'
+TRAIN_DIR='_base/train_animals'
+VAL_DIR='_base/val_animals'
 
 # Image target dimensions
-image_dim = 128
+image_dim = 150
 input_shape = (image_dim, image_dim)
 batch_size = 64
 #--------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +43,7 @@ batch_size = 64
 train_gen = ImageDataGenerator(
     rescale= 1./255,
     rotation_range=30,
-    shear_range=0.2,
+    shear_range=0.1,
     fill_mode='nearest',
     horizontal_flip=True,
 )
@@ -110,7 +114,7 @@ earlystop = EarlyStopping(
     restore_best_weights=True
 )# Stops the training process if the model fails to impprove within 10 epochs
 modelcheckpoint = ModelCheckpoint(
-    filepath='ml_basic_VGG16_2.h5',
+    filepath='ml_basic_tf_acc.h5',
     monitor='val_loss',
     verbose=1,
     save_best_only=True 
@@ -154,7 +158,7 @@ sgd = SGD(
 #--------------------------------------------------------------------------------------------------------------------------------
 model.compile(
     optimizer = sgd, # Test adam and nadam/ best result rmsprop
-    loss = categorical_crossentropy,
+    loss = binary_crossentropy,
     metrics = ['accuracy'],
 )
 #--------------------------------------------------------------------------------------------------------------------------------
@@ -166,7 +170,7 @@ model.fit(
     epochs = 5, 
     steps_per_epoch=train_size//batch_size, 
     validation_steps=val_size//batch_size,
-    #class_weight=class_weights,
+    class_weight=class_weights,
     callbacks=[
         modelcheckpoint,
         csvlogger,
@@ -179,4 +183,4 @@ model.fit(
 # Convert and save model to a tflite file
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 tflite_model = converter.convert()
-open('ml_basic_VGG16_2.tflite','wb').write(tflite_model)
+open('ml_basic_tf_acc.tflite','wb').write(tflite_model)

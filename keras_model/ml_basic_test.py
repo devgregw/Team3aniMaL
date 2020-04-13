@@ -8,15 +8,19 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import load_model
 
+#import plaidml
+#from plaidml import keras
+#from keras.preprocessing.image import ImageDataGenerator
+#from keras.models import load_model
+
 labels = ['bird', 'butterfly','cat', 'dog', 'horse', 'spider']
 
 # Directories for images
 TEST_DIR='_128/test_animals'
-
 # Image target dimensions
 image_dim = 128
 input_shape = (image_dim, image_dim)
-batch_size = 128
+batch_size = 32
 
 #--------------------------------------------------------------------------------------------------------------------------------
 # Image preprocessing
@@ -32,13 +36,18 @@ test_data = test_gen.flow_from_directory(
     batch_size=batch_size,
     class_mode='categorical',
 )
+test_size = test_data.n
 print(test_data.class_indices)
 #--------------------------------------------------------------------------------------------------------------------------------
 # Model Testing
 #--------------------------------------------------------------------------------------------------------------------------------
-model = load_model('ml_basic_keras_categorical_87.h5')
-results =  model.evaluate(test_data)
-
+model = load_model('ml_basic_tf_acc.h5')
+results =  model.evaluate(
+    (item for item in test_data), 
+    batch_size=batch_size,
+    steps=test_size
+)
+#results =  model.evaluate_generator(test_data)
 print(f'{model.metrics_names}{results}')
 
 
