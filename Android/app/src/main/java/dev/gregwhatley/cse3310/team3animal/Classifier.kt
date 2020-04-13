@@ -1,24 +1,21 @@
 package dev.gregwhatley.cse3310.team3animal
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.google.android.gms.tasks.Tasks
-import com.google.firebase.database.collection.ImmutableSortedMap
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
+import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import java.io.File
 import java.io.FileInputStream
 import java.nio.ByteBuffer
-import java.nio.ByteOrder
 import java.nio.channels.FileChannel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,12 +38,18 @@ class Classifier(private val activity: AppCompatActivity) {
     }
 
     init {
+        // Load the model from internal storage
         val descriptor = activity.resources.openRawResourceFd(R.raw.ml_basic_plaidml_binary_98)
         val stream = FileInputStream(descriptor.fileDescriptor)
         val channel = stream.channel
         val offset = descriptor.startOffset
         val length = descriptor.declaredLength
-        interpreter = Interpreter(channel.map(FileChannel.MapMode.READ_ONLY, offset, length) as ByteBuffer)
+        val buffer = channel.map(FileChannel.MapMode.READ_ONLY, offset, length) as ByteBuffer
+
+        // Create an interpreter
+        interpreter = Interpreter(buffer)
+
+        // Save the model's desired size of input
         inputWidth = interpreter.getInputTensor(0).shape()[1]
         inputHeight = interpreter.getInputTensor(0).shape()[2]
     }
@@ -82,8 +85,9 @@ class Classifier(private val activity: AppCompatActivity) {
     }
 
     fun classifyCapturedPhoto(callback: (SortedMap<Float, String>?) -> Unit) {
-        if ((photoPath::isNullOrBlank)()) capturePhoto()
+        if ((photoPath::isNullOrBlank)()) capturePhoto() // Capture a photo if one hasn't been captured already
         else {
+            // Asynchronously classify the image and run the callback after
             Tasks.call(executorService, Callable { classifyWorker() }).addOnCompleteListener {
                 callback(it.result)
             }
@@ -91,7 +95,10 @@ class Classifier(private val activity: AppCompatActivity) {
     }
 
     fun capturePhoto() {
+        // Create an intent to launch the camera
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        // Create a temp file to store the photo
         val stamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
         val dir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val file = File.createTempFile("JPEG_${stamp}_", ".jpg", dir).apply {
@@ -99,6 +106,8 @@ class Classifier(private val activity: AppCompatActivity) {
         }
         val uri = FileProvider.getUriForFile(activity, "dev.gregwhatley.cse3310.team3animal", file)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+
+        // Launch camera
         activity.startActivityForResult(intent, CAPTURE_REQUEST_CODE)
     }
 }
