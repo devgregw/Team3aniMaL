@@ -439,3 +439,14 @@ Thumbs.db
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.gitignore.io/api/gradle,python,kotlin,android,intellij,androidstudio,git
+
+### ML###
+
+# Ignore all ML images
+keras_model/_128/
+keras_model_base/
+
+# Ignore models
+*.h5
+*.tflite
+*.csv
