@@ -1,9 +1,10 @@
-# Author: Jonah Bui
+# Author: Jonah Bui & Burhanuddin Chinwala
 # Date: March 17, 2020
 # Description: Used to predict images in a directory
 import os
 from os import listdir
 import numpy as np
+from PIL import Image
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator

@@ -1,4 +1,4 @@
-# Author: Jonah Bui
+# Author: Jonah Bui & Burhanuddin Chinwala
 # Date: April 14, 2020
 # Description: Used to determine the average sizes of images in the training and validation directory
 import os

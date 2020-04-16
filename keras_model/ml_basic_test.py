@@ -1,4 +1,4 @@
-# Author: Jonah Bui
+# Author: Jonah Bui & Burhanuddin Chinwala
 # Date: March 17, 2020
 # Purpose: Used to test model by feeding in a directory of images sorted in subdirectories
 import os

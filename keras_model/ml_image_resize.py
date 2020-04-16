@@ -1,12 +1,12 @@
-# Author: Jonah Bui
+# Author: Jonah Bui & Burhanuddin Chinwala
 # Date: March 13th, 2020
 # Description: Converts image to RGB and resizes them
 import os
 from os import listdir
 from PIL import Image
 
-target_size = (128,128)
-target_directory = 'Spider/'
+target_size = (256,256)
+target_directory = 'resize/'
 
 # Resizes images and OVERWRITES the original
 for filename in listdir(target_directory):
