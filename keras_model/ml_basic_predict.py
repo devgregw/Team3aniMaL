@@ -3,20 +3,13 @@
 # Description: Used to predict images in a directory
 import os
 from os import listdir
+import numpy as np
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import load_model
 
-#import plaidml
-#from plaidml import keras
-#from keras.preprocessing.image import ImageDataGenerator
-#from keras.models import load_model
 
-import numpy as np
-from PIL import Image
-import matplotlib.pyplot as plt
-import matplotlib.image as pltimg
 
 # Used to find model labels for a prediction by finding the highest number in
 # an array holding the models prediction
@@ -37,13 +30,13 @@ def findIndex(array):
 PREDICT_DIR = '_128/predict_animals'
 labels = ['bird', 'butterfly','cat', 'dog', 'horse', 'spider']
 
-target_dim = 128
+target_dim = 352
 target_size = (target_dim, target_dim)
 
 #--------------------------------------------------------------------------------------------------------------------------------
 # Model Predictions
 #--------------------------------------------------------------------------------------------------------------------------------
-model = load_model('ml_basic_tf_acc.h5')
+model = load_model('ml_basic_tf_acc3.h5')
 
 # Used to predict each image
 for image in listdir(PREDICT_DIR):

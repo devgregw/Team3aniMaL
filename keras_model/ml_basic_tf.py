@@ -33,9 +33,9 @@ TRAIN_DIR='_base/train_animals'
 VAL_DIR='_base/val_animals'
 
 # Image target dimensions
-image_dim = 150
+image_dim = 256#352
 input_shape = (image_dim, image_dim)
-batch_size = 64
+batch_size = 32
 #--------------------------------------------------------------------------------------------------------------------------------
 # Image preprocessing
 #--------------------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ batch_size = 64
 train_gen = ImageDataGenerator(
     rescale= 1./255,
     rotation_range=30,
-    shear_range=0.1,
+    shear_range=0.2,
     fill_mode='nearest',
     horizontal_flip=True,
 )
@@ -138,10 +138,12 @@ base_model = VGG16(
     input_shape=(image_dim, image_dim, 3)
 )
 add_model = Sequential([
+    Conv2D(128, kernel_size = (3,3), padding='same'),
+    MaxPooling2D(pool_size = (2,2)),
     Flatten(),
     Dense(256),
     Activation(activation='relu'),
-
+    Dropout(0.2),
     Dense(train_data.num_classes, activation = 'softmax')
 ])
 model = Model(inputs=base_model.input, outputs=add_model(base_model.output))
@@ -158,7 +160,7 @@ sgd = SGD(
 #--------------------------------------------------------------------------------------------------------------------------------
 model.compile(
     optimizer = sgd, # Test adam and nadam/ best result rmsprop
-    loss = binary_crossentropy,
+    loss = categorical_crossentropy,
     metrics = ['accuracy'],
 )
 #--------------------------------------------------------------------------------------------------------------------------------
@@ -167,7 +169,7 @@ model.compile(
 model.fit(
     (item for item in train_data),
     validation_data = val_data, 
-    epochs = 5, 
+    epochs = 20, 
     steps_per_epoch=train_size//batch_size, 
     validation_steps=val_size//batch_size,
     class_weight=class_weights,
