@@ -8,4 +8,6 @@
     <string name="is_this_classification_correct">Is this classification correct?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="content_description_capture_button">Capture button</string>
+    <string name="loading">Loading</string>
 </resources>
