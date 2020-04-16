@@ -23,7 +23,7 @@ The images used in this project for classification are obtained mainly through g
 - https://www.kaggle.com/c/dogs-vs-cats
 - http://www.vision.caltech.edu/visipedia/CUB-200-2011.html
 
-Over 60,000 photos were obtained (unbalanced) for the classification process. For the balanced dataset, there were 36,000 images meaning 6,000 for each animal. The data was split 80/20 for validation.
+About 60,000 photos were obtained (unbalanced) for the classification process. For the balanced dataset, there were 36,000 images meaning 6,000 for each animal. The data was split 80/20 for validation.
 
 ## Files Included
 ### keras_model
@@ -39,6 +39,6 @@ Over 60,000 photos were obtained (unbalanced) for the classification process. Fo
 The model implemented within the app is built upon the VGG16 pretrained model. It was able to obtain a validation accuracy above 95% and testing accuracy above 85%
 
 ## Tools Used
-- PlaidML: a very useful library that enables the usage of AMD GPUs and much others that are unsupported by tensorflow. Used to speed up training.
+- PlaidML: a very useful library that enables the usage of AMD GPUs and much others that are unsupported by tensorflow. Used to speed up training. Deprecated use.
 - AdvancedRenamer: useful for renaming large batches of files
 - IfranView: also useful for renaming, but also good for image cropping, and converting batches of images to a single file type
