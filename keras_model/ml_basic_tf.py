@@ -10,6 +10,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import Sequential
 from tensorflow.keras import Model
 from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 from tensorflow.keras.optimizers import SGD
 from tensorflow.keras.losses import binary_crossentropy, categorical_crossentropy
@@ -22,11 +23,11 @@ from tensorflow.keras.losses import binary_crossentropy, categorical_crossentrop
 # epochs: number of epochs to run
 
 # Directories for images
-TRAIN_DIR='_base3/training'
-VAL_DIR='_base3/validation'
+TRAIN_DIR='_base/training'
+VAL_DIR='_base/validation'
 
 SAVE_DIR = 'drive/My Drive/Projects/'
-FILENAME = 'ml_basic_tf_acc3'
+FILENAME = 'ml_basic_tf_acc5'
 
 # Image target dimensions
 image_dim = 352
@@ -34,16 +35,18 @@ input_shape = (image_dim, image_dim)
 batch_size = 32
 
 epochs = 50
+earlystop_patience = 6
+reducelr_patience = 2
 #--------------------------------------------------------------------------------------------------------------------------------
 # Image preprocessing
 #--------------------------------------------------------------------------------------------------------------------------------
 # Generate training data with several transformations
 train_gen = ImageDataGenerator(
     rescale= 1./255,
-    rotation_range=30,
-    shear_range=0.2,
+    rotation_range=40,
+    shear_range=0.3,
     fill_mode='nearest',
-    channel_shift_range=0.2,
+    channel_shift_range=0.3,
     horizontal_flip=True,
 )
 # Just read in validation data unmodified ( want to validate on regular images )
@@ -110,7 +113,7 @@ print(class_weights)
 # Callbacks
 #--------------------------------------------------------------------------------------------------------------------------------
 earlystop = EarlyStopping(
-    patience=5,
+    patience=earlystop_patience,
     monitor='val_loss',
     restore_best_weights=True
 )# Stops the training process if the model fails to impprove within 10 epochs
@@ -121,28 +124,29 @@ modelcheckpoint = ModelCheckpoint(
     save_best_only=True 
 )# Save the file after improvement of an epoch 
 csvlogger = CSVLogger(
-    filename='model_basic.csv',
+    filename='ml_basic_tf_acc5.csv',
     append=False
 )# Store epoch information for analysis
 reducelr = ReduceLROnPlateau(
     monitor='val_loss',
-    patience= 3,
+    patience= reducelr_patience,
     factor=0.5,
     min_lr=0.00001
 )# Reduce the learning rate if the model fails to improve
 #--------------------------------------------------------------------------------------------------------------------------------
 # Model Architecture
 #--------------------------------------------------------------------------------------------------------------------------------
-base_model = VGG16(
+
+base_model = InceptionResNetV2(
     weights='imagenet',
     include_top=False,
     input_shape=(image_dim, image_dim, 3)
 )
 add_model = Sequential([
     Conv2D(256, kernel_size = (3,3), padding='same'),
-    MaxPooling2D(pool_size = (2,2)),
+    MaxPooling2D(pool_size = (2,2), padding='same'),
     Flatten(),
-    Dense(512),
+    Dense(256),
     Activation(activation='relu'),
     Dropout(0.3),
     Dense(train_data.num_classes, activation = 'softmax')
@@ -154,7 +158,7 @@ model.summary()
 #--------------------------------------------------------------------------------------------------------------------------------
 sgd = SGD(
     lr=1e-4,
-    momentum=0.9
+    momentum=0.9,
 )
 #--------------------------------------------------------------------------------------------------------------------------------
 # Compile Model
