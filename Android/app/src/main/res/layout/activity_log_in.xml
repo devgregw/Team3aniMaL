@@ -66,8 +66,8 @@
                 android:text="@string/log_in" />
 
             <Button
-                style="?attr/buttonBarNeutralButtonStyle"
                 android:id="@+id/register"
+                style="?attr/buttonBarNeutralButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -77,6 +77,17 @@
                 android:textColor="@android:color/primary_text_dark" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/forgot"
+            style="?attr/buttonBarNeutralButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="0.5"
+            android:text="@string/forgot_password"
+            android:textColor="@android:color/primary_text_dark" />
 
     </LinearLayout>
 </RelativeLayout>
