@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
     companion object {
-        const val MENU_LOG_OUT = 1
         const val MENU_ACCOUNT = 2
         const val MENU_MODEL_INFO = 3
     }
@@ -118,10 +117,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (menu != null) {
             // Initialize the options menu
-            /*menu.add(Menu.NONE, MENU_LOG_OUT, 0, "Log Out").setIcon(R.drawable.ic_action_logout)
-                .setShowAsActionFlags(
-                    MenuItem.SHOW_AS_ACTION_IF_ROOM
-                )*/
             menu.add(Menu.NONE, MENU_MODEL_INFO, 0, "ML Info").setIcon(R.drawable.ic_action_info)
                 .setShowAsActionFlags(
                     MenuItem.SHOW_AS_ACTION_IF_ROOM
