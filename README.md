@@ -27,18 +27,19 @@ About 60,000 photos were obtained (unbalanced) for the classification process. F
 
 ## Files Included
 ### keras_model
-- ml_basic_plaidml.py: trains a model with a plaidml backend with Keras support
 - ml_basic_predict.py: used to predict images in a directory
 - ml_basic_test.py: used to test over labeled images in a directory
 - ml_basic_tf.py: trains a model with a tensorflow with Keras
 - ml_h5_to_tflite.py: converts a Keras h5 file to a tflite file 
-- ml_image_resize.py: resizes images in a directory
-- ml_basic_visual.png: a picture showing the model architecture
-
+- ml_average_dimensions.py: calculates the average dimension of all images in a directory
 ## Model
 The model implemented within the app is built upon the VGG16 pretrained model. It was able to obtain a validation accuracy above 95% and testing accuracy above 85%
 
 ## Tools Used
-- PlaidML: a very useful library that enables the usage of AMD GPUs and much others that are unsupported by tensorflow. Used to speed up training. Deprecated use.
 - AdvancedRenamer: useful for renaming large batches of files
 - IfranView: also useful for renaming, but also good for image cropping, and converting batches of images to a single file type
+
+## How to Run
+# Running the Model
+
+# Running the Android App
