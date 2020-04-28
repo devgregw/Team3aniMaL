@@ -40,6 +40,50 @@ The model implemented within the app is built upon the VGG16 pretrained model. I
 - IfranView: also useful for renaming, but also good for image cropping, and converting batches of images to a single file type
 
 ## How to Run
-# Running the Model
+### Running the Model Implementation
+#### Setting up the repository
+Clone the repository and place it in your preferred project space.
+#### Downloading the model
+To download a sample model to predict and test view this link:
+https://drive.google.com/drive/folders/1OD2z9ztrpB-JVjK30fnOF85GQiGl2coc?usp=sharing
 
-# Running the Android App
+Once the model file has been downloaded, place it in the keras_model folder provided in this repository.
+#### Downloading the images
+To download the image dataset view this link:
+https://drive.google.com/open?id=1_aKkNb15ZWnGHbUpcpShYuiCSZleaH6J
+
+Once the \_base.zip file has been downloaded, extract it the keras_model folder provided in this repository. Or you may place it anywhere in your preferred directory. However, be aware you will need to adjust your paths in the python files to acommodate for the different image paths.
+
+#### Running ml_average_dimension.py
+To gather the average dimension of all the images in a directory please adjust the following lines:
+- Line 6: Change the directory to the absolute directory path containing the \_base folder that you extracted.
+- Line 13: Ensure TRAIN_DIR is set to "\_base/training"
+- Line 14: Ensure VAL_DIR is set to "\_base/validation"
+
+After running the program it will output the average height and dimension.
+#### Running ml_basic_predict.py
+To predict images in a directory (if you want to predict just a photo it must also be in the corresponding directory):
+- Line 31: Change PREDICT_DIR to folder relative path containing the images to predict. Ex: "\_base/prediction"
+- Lind 34: Set target_dim to the image prediction size for the model
+- Line 40: Change the relative path in load_model to a relative path containing the model you want to be tested if it is different.
+- Example: "ml_basic_tf_acc5.h5"
+- Ensure the model is an h5 file not a tflite file
+#### Running ml_basic_test.py
+- Line 13: Change TEST_DIR to a relative path containing the testing images
+- Line 15: Adjust image_dim to the imaage dimensions of the model if needed
+- Line 38: Change the relative path in load_model to a relative path containing the model you want to be tested if it is different.
+- Example: "ml_basic_tf_acc5.h5"
+- Ensure the model is an h5 file not a tflite file
+#### Running ml_basic_tf.py
+- Line 26: Change TRAIN_DIR to a relative path containing the training image data. Example: "\_base/training"
+- Line 27: Change VAL_DIR to a relative path containing the validation image data. Example: "\_base/validation"
+- Line 29: Change SAVE_DIR to a relative directory or absolute directory you would like to save the model to
+- Line 30: Change FILENAME to the filename you want the model to output as
+- Line 33: Change image_dim to the preferred image dimensions you want to train the model on
+- Line 37: Change epochs to the number of epochs you want the model to iterate over
+- Line 38: Change earlystop_patience
+- Line 39: Change reducelr_patience
+#### Running ml_h5_to_tflite.py
+- Line 8:
+- Line 9:
+### Running the Android App
