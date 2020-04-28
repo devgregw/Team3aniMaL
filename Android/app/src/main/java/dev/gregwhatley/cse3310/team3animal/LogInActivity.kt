@@ -1,15 +1,20 @@
 package dev.gregwhatley.cse3310.team3animal
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import kotlinx.android.synthetic.main.activity_log_in.*
+
 
 class LogInActivity : AppCompatActivity() {
 
@@ -17,6 +22,31 @@ class LogInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
         setTitle(R.string.app_full_name)
+        forgot.setOnClickListener {
+            // Text box for user to input their email address
+            val forgotEmail = EditText(this).apply {
+                hint = "you@example.com"
+            }
+
+            // Prompt the user for their email address
+            AlertDialog.Builder(this)
+                .setTitle("Forgot Password")
+                .setMessage("Enter the email address you used to register:")
+                .setView(forgotEmail)
+                .setPositiveButton("Next") { _, _ ->
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(forgotEmail.text.toString()).addOnCompleteListener {
+                        if (it.exception != null)
+                            Log.e("PWD", it.exception!!.message, it.exception!!)
+                        Snackbar.make(forgot, if (it.isSuccessful) "Check your email for a password reset link." else (if (it.exception is FirebaseAuthInvalidUserException) "A user with this email address doesn't exist." else "Unable to complete your request."), Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+        }
+        register.setOnClickListener {
+            // Open the registration form
+            startActivity(Intent(this, RegistrationActivity::class.java))
+        }
         log_in.setOnClickListener {
             // Firebase throws an exception if email_address or password is empty, so show a message.
             if (email_address.text.isEmpty() or password.text.isEmpty()) {

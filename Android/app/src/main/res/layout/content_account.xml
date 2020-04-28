@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".AccountActivity"
+    tools:showIn="@layout/activity_account">
+        <LinearLayout
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/account_layout">
+            <ImageView
+                android:layout_marginTop="@dimen/text_margin"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/baseline_account_circle_24"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/profile_image"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin">
+                <TableRow android:layout_marginBottom="@dimen/text_margin">
+                    <ImageView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_email_white_32dp"
+                        android:contentDescription="Email address" />
+                    <TextView
+                        android:id="@+id/email_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/text_margin"
+                        tools:text="Email address"
+                        android:layout_gravity="center_vertical"/>
+                </TableRow>
+                <TableRow android:layout_marginBottom="@dimen/text_margin">
+                    <ImageView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_person_white_32dp"
+                        android:contentDescription="Profession" />
+                    <TextView
+                        android:id="@+id/profession"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/text_margin"
+                        tools:text="Profession"
+                        android:layout_gravity="center_vertical"/>
+                </TableRow>
+                <TableRow android:layout_marginBottom="@dimen/text_margin">
+                    <ImageView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_home_white_32dp"
+                        android:contentDescription="Address" />
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/text_margin"
+                        android:maxLines="3"
+                        android:minLines="2"
+                        android:lineHeight="18sp"
+                        tools:text="Line 1\nLine 2\nCity State, Zip"
+                        android:layout_gravity="center_vertical"/>
+                </TableRow>
+                <TableRow android:layout_marginBottom="@dimen/text_margin">
+                    <ImageView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_event_white_32dp"
+                        android:contentDescription="Date Registered" />
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/text_margin"
+                        tools:text="January 1, 1970"
+                        android:layout_gravity="center_vertical"/>
+                </TableRow>
+                <TableRow android:layout_marginBottom="@dimen/text_margin">
+                    <ImageView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_idno_white_32dp"
+                        android:contentDescription="UTA ID" />
+                    <TextView
+                        android:id="@+id/uta_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/text_margin"
+                        tools:text="1002345678"
+                        android:layout_gravity="center_vertical"/>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+</androidx.core.widget.NestedScrollView>
