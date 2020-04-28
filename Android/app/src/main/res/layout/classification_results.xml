@@ -3,81 +3,94 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="400dp"
+    android:animateLayoutChanges="true"
+    android:background="#242424"
     android:orientation="vertical"
-    app:behavior_hideable="true"
-    app:layout_behavior="@string/bottom_sheet_behavior"
     android:theme="@style/AppTheme"
-    android:background="#242424">
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/bottom_sheet_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:title="Classification"
-        android:id="@+id/bottom_sheet_toolbar"
-        app:menu="@menu/menu_bottom_sheet"/>
+        app:menu="@menu/menu_bottom_sheet"
+        app:title="Classification" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                android:text="@string/is_this_classification_correct"
                 android:layout_marginStart="16dp"
-                android:textAlignment="center"/>
+                android:text="@string/is_this_classification_correct"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
+
             <LinearLayout
+                style="?attr/buttonBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:paddingTop="8dp"
-                android:layout_gravity="center"
-                style="?attr/buttonBarStyle">
+                android:paddingEnd="16dp">
+
                 <Button
+                    android:id="@+id/sheet_button_correct"
                     style="?attr/buttonBarPositiveButtonStyle"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorAccent"
-                    android:text="@string/yes"
-                    android:id="@+id/sheet_button_correct"/>
+                    android:text="@string/yes" />
+
                 <Button
+                    android:id="@+id/sheet_button_incorrect"
                     style="?attr/buttonBarNegativeButtonStyle"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="@string/no"
-                    android:id="@+id/sheet_button_incorrect"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_margin="16dp"
-        android:weightSum="1"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
         <LinearLayout
+            android:id="@+id/sheet_label_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:orientation="vertical"
-            android:id="@+id/sheet_label_layout"/>
+            android:orientation="vertical" />
+
         <LinearLayout
+            android:id="@+id/sheet_probability_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:orientation="vertical"
-            android:id="@+id/sheet_probability_layout"/>
+            android:orientation="vertical" />
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/preview"/>
 
 </LinearLayout>
