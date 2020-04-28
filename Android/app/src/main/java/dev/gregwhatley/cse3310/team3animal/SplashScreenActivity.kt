@@ -4,6 +4,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Process
+import android.provider.Settings
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
@@ -29,9 +32,23 @@ class SplashScreenActivity : AppCompatActivity() {
         val allTrue = grantResults.map { r -> r == PackageManager.PERMISSION_GRANTED }.all { true }
         if (requestCode == PERMISSIONS_REQUEST_CODE && allTrue)
             // Permissions granted - continue.
-            checkAuth()
+            initializeModel()
         else if (requestCode == PERMISSIONS_REQUEST_CODE) {
-            // TODO: handle rejected permissions
+            // Some permissions are missing - show a message
+            AlertDialog.Builder(this)
+                .setTitle("Insufficient Permissions")
+                .setMessage("This app needs permission to access your phone's camera and storage.  Because you denied one or more permissions, this app will not be able work as intended.  Tap 'Ask Again' to accept any missing permissions.")
+                .setPositiveButton("Ask Again") { _, _ ->
+                    requestPermissions()
+                }.setNegativeButton("Quit") { _, _ ->
+                    Process.killProcess(Process.myPid())
+                }.show()
+        }
+    }
+
+    private fun initializeModel() {
+        Classifier.loadModel(resources).addOnCompleteListener {
+            checkAuth()
         }
     }
 
@@ -57,7 +74,7 @@ class SplashScreenActivity : AppCompatActivity() {
         // Check for necessary permissions.
         if (arePermissionsGranted())
             // No new permissions needed - continue.
-            checkAuth()
+            initializeModel()
         // Request permissions otherwise.
         else requestPermissions()
     }
