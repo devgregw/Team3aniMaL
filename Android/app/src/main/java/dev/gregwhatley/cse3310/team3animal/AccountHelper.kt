@@ -27,6 +27,7 @@ class AccountHelper(private val emailAddress: String,
 
     private lateinit var handler: AccountCreationHandler
 
+    // For new accounts, create the Firebase Auth user (step 1)
     private fun createFirebaseUser() {
         try {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailAddress, password)
@@ -40,6 +41,7 @@ class AccountHelper(private val emailAddress: String,
         }
     }
 
+    // For new accounts, wait for the user to be signed in (step 2)
     private fun waitForAuth() {
         FirebaseAuth.getInstance().addAuthStateListener { state ->
             if (state.currentUser == null)
@@ -48,6 +50,7 @@ class AccountHelper(private val emailAddress: String,
         }
     }
 
+    // Upload profile image to Firebase Storage
     private fun saveProfileImage(uid: String) {
         try {
             val stream = ByteArrayOutputStream()
@@ -64,6 +67,7 @@ class AccountHelper(private val emailAddress: String,
         }
     }
 
+    // Get the image URL for the profile image after being uploaded
     private fun getProfileImageUrl(uid: String, ref: StorageReference) {
         try {
             ref.downloadUrl.addOnCompleteListener {
@@ -77,6 +81,7 @@ class AccountHelper(private val emailAddress: String,
 
     }
 
+    // Set the display name and profile image URI properties on the Firebase Auth user
     private fun setFirebaseUserProperties(uid: String, profileImageUrl: Uri) {
         try {
             FirebaseAuth.getInstance().currentUser!!.updateProfile(UserProfileChangeRequest.Builder()
@@ -93,6 +98,7 @@ class AccountHelper(private val emailAddress: String,
         }
     }
 
+    // Save additional info to the Firebase Realtime Database
     private fun createProfile(uid: String) {
         val userInfo = HashMap<String, Any>().apply {
             put("id", utaId)
@@ -117,11 +123,13 @@ class AccountHelper(private val emailAddress: String,
         }
     }
 
+    // Starts the account creation process
     fun createAccount(completion: AccountCreationHandler) {
         handler = completion
         createFirebaseUser()
     }
 
+    // For updated accounts, changes email address (step 1)
     private fun updateEmailAddress() {
         FirebaseAuth.getInstance().addAuthStateListener { state ->
             if (state.currentUser == null)
@@ -138,6 +146,8 @@ class AccountHelper(private val emailAddress: String,
         }
     }
 
+    // If the user did not opt to change their password, save their new profile image and continue from there
+    // If they want to change their password, save it then continue like normal
     private fun updatePassword() {
         if (password.isBlank()) {
             saveProfileImage(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -154,6 +164,7 @@ class AccountHelper(private val emailAddress: String,
         }
     }
 
+    // Starts the account update process
     fun updateAccount(completion: AccountCreationHandler) {
         handler = completion
         updateEmailAddress()

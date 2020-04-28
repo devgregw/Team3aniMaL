@@ -68,11 +68,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Save correct stats
         bottomSheetDialog.sheet_button_correct.setOnClickListener {
             SessionStatistics.correct(map[map.keys.max()!!]!!)
             bottomSheetDialog.dismiss()
         }
 
+        // Save wrong stats
         bottomSheetDialog.sheet_button_incorrect.setOnClickListener {
             SessionStatistics.incorrect(map[map.keys.max()!!]!!)
             bottomSheetDialog.dismiss()
@@ -125,12 +127,13 @@ class MainActivity : AppCompatActivity() {
                 .setShowAsActionFlags(
                     MenuItem.SHOW_AS_ACTION_ALWAYS
                 )
+
+            // Load profile image for menu button
             val size = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, resources.displayMetrics).toInt()
             Glide.with(this)
                 .load(FirebaseAuth.getInstance().currentUser!!.photoUrl)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-
                         return true
                     }
 
@@ -175,6 +178,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         title = "Home"
 
+        // Showing the logout button
         supportActionBar?.apply {
             setHomeAsUpIndicator(R.drawable.ic_action_logout)
             setDisplayHomeAsUpEnabled(true)

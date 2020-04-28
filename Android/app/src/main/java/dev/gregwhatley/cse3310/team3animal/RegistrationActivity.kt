@@ -34,6 +34,7 @@ import kotlinx.android.synthetic.main.content_registration.*
 class RegistrationActivity : AppCompatActivity() {
     private var profileImage: Bitmap? = null
 
+    // Show the selected profile image
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val result = CropImage.getActivityResult(data)
@@ -50,10 +51,12 @@ class RegistrationActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    // Shows an error for a text input field
     private fun setTextInputError(field: TextInputEditText, message: String?) {
         field.error = message
     }
 
+    // Checks if a text input field is invalid and sets an error if so
     private fun isFieldInvalid(field: TextInputEditText, errorMessage: String?): Boolean {
         if (field.text?.toString().isNullOrBlank()) {
             Log.d("Invalid Field", errorMessage ?: field.id.toString())
@@ -63,6 +66,7 @@ class RegistrationActivity : AppCompatActivity() {
         return false
     }
 
+    // Checks if a number input field is invalid or does not have the required number of digits.  If so, shows an error
     private fun isNumberInvalid(field: TextInputEditText, numDigits: Int, errorMessage: String?): Boolean {
         if (isFieldInvalid(field, errorMessage))
             return true
@@ -73,11 +77,13 @@ class RegistrationActivity : AppCompatActivity() {
         return false
     }
 
+    // Sets enabled state for all fields and buttons
     private fun setFieldsEnabled(value: Boolean) {
         arrayOf(fab, name, email_address, select_image, uta_id, profession, address1, address2, city, state, zip, password, password_confirm)
             .forEach { v -> v.isEnabled = value }
     }
 
+    // Loads existing profile info for account editing
     private fun populateFields() {
         val dialog = ProgressDialogHelper.create(this, "Please wait...")
         dialog.show()
@@ -106,6 +112,8 @@ class RegistrationActivity : AppCompatActivity() {
                     city.setText(address["city"]?.toString())
                     state.setSelection(address["state"]?.toString()?.toInt() ?: 0)
                     zip.setText(address["zip"]?.toString())
+
+                    // Load profile image
                     val size = 512
                     Glide.with(this@RegistrationActivity)
                         .load(FirebaseAuth.getInstance().currentUser!!.photoUrl!!)
@@ -120,6 +128,7 @@ class RegistrationActivity : AppCompatActivity() {
                                 target: Target<Drawable>?,
                                 isFirstResource: Boolean
                             ): Boolean {
+                                // An error occurred, show the default icon
                                 profileImage = BitmapFactory.decodeResource(
                                     this@RegistrationActivity.resources,
                                     R.drawable.baseline_account_circle_24
@@ -180,9 +189,11 @@ class RegistrationActivity : AppCompatActivity() {
                 .start(this)
         }
 
+        // If the user is editng their account
         if (intent.getBooleanExtra("edit", false))
             populateFields()
 
+        // Save button
         fab.setOnClickListener { view ->
             val name = name.text?.toString()
             val email = email_address.text?.toString()
@@ -203,6 +214,8 @@ class RegistrationActivity : AppCompatActivity() {
                     or isFieldInvalid(this.city, "Your city is required.")
                     or isNumberInvalid(this.zip, 5, "Your ZIP code is required.")
                     or if (isEditing) false else isFieldInvalid(this.password, "A password is required."))
+
+            // Checking for errors
             if (errors)
                 return@setOnClickListener
             if (profileImage == null) {
@@ -213,8 +226,10 @@ class RegistrationActivity : AppCompatActivity() {
                 setTextInputError(this.password_confirm, "Confirmation password does not match.")
                 return@setOnClickListener
             }
+
             setFieldsEnabled(false)
 
+            // Loading dialog
             val dialog = ProgressDialogHelper.create(this, if (isEditing) "Saving changes..." else "Creating Account...")
             dialog.show()
 
@@ -232,6 +247,7 @@ class RegistrationActivity : AppCompatActivity() {
                 zipCode!!
             )
             if (isEditing) {
+                // Update the account
                 helper.updateAccount { successful, error ->
                     if (successful) {
                         dialog.dismiss()
@@ -249,6 +265,7 @@ class RegistrationActivity : AppCompatActivity() {
                     }
                 }
             } else {
+                // Create the account
                 helper.createAccount { successful, error ->
                     if (successful) {
                         startActivity(
