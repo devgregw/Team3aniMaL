@@ -169,6 +169,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -199,6 +200,14 @@ class MainActivity : AppCompatActivity() {
         // When the capture button is tapped, pick a photo
         capture_button.setOnClickListener {
             classifier.capturePhoto()
+        }
+
+        // Stats button
+        fab.setOnClickListener {
+            val message = "Total classifications: ${SessionStatistics.total}\nEstimated accuracy: ${"${"%.2f".format(SessionStatistics.correctRatio * 100)}%"}\n\nClassifications by label\n" + SessionStatistics.counts.map {
+                "${it.key.capitalize(Locale.US)}: ${it.value}"
+            }.joinToString(separator = "\n")
+            androidx.appcompat.app.AlertDialog.Builder(this).setTitle("Statistics").setMessage(message).setPositiveButton("Dismiss", null).show()
         }
     }
 }

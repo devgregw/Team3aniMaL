@@ -168,13 +168,5 @@ class AccountActivity : AppCompatActivity() {
 
         // Load profile info from the database
         loadProfile()
-
-        // Stats button
-        fab.setOnClickListener {
-            val message = "Total classifications: ${SessionStatistics.total}\nEstimated accuracy: ${"${"%.2f".format(SessionStatistics.correctRatio * 100)}%"}\n\nClassifications by label\n" + SessionStatistics.counts.map {
-                "${it.key.capitalize(Locale.US)}: ${it.value}"
-            }.joinToString(separator = "\n")
-            AlertDialog.Builder(this).setTitle("Statistics").setMessage(message).setPositiveButton("Dismiss", null).show()
-        }
     }
 }
