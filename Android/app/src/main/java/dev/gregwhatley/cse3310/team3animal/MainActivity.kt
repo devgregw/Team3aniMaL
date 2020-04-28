@@ -154,21 +154,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (/*item.itemId == MENU_LOG_OUT*/item.itemId == android.R.id.home) {
-            // Ask the user to confirm when logging out.
-            AlertDialog.Builder(this).setTitle("Log Out")
-                .setMessage("Are you sure you want to log out?")
-                .setPositiveButton("LOG OUT") { _: DialogInterface, _: Int ->
-                    // Confirmed, sign out and show log in activity
-                    FirebaseAuth.getInstance().signOut()
-                    startActivity(Intent(this, SplashScreenActivity::class.java))
-                    finish()
-                }.setNegativeButton("CANCEL", null).show()
-        } else if (item.itemId == MENU_ACCOUNT)
-            startActivity(Intent(this, AccountActivity::class.java))
-        else if (item.itemId == MENU_MODEL_INFO)
-            startActivity(Intent(this, ModelDetailActivity::class.java))
-            //showModelInfo()
+        when (item.itemId) {
+            android.R.id.home -> {
+                // Ask the user to confirm when logging out.
+                AlertDialog.Builder(this).setTitle("Log Out")
+                    .setMessage("Are you sure you want to log out?")
+                    .setPositiveButton("LOG OUT") { _: DialogInterface, _: Int ->
+                        // Confirmed, sign out and show log in activity
+                        FirebaseAuth.getInstance().signOut()
+                        startActivity(Intent(this, SplashScreenActivity::class.java))
+                        finish()
+                    }.setNegativeButton("CANCEL", null).show()
+            }
+            MENU_ACCOUNT ->// Open the account activity
+                startActivity(Intent(this, AccountActivity::class.java))
+            MENU_MODEL_INFO -> startActivity(Intent(this, ModelDetailActivity::class.java))
+        }
         return super.onOptionsItemSelected(item)
     }
 
