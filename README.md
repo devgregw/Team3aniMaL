@@ -60,21 +60,27 @@ To gather the average dimension of all the images in a directory please adjust t
 - Line 13: Ensure TRAIN_DIR is set to "\_base/training"
 - Line 14: Ensure VAL_DIR is set to "\_base/validation"
 
-After running the program it will output the average height and dimension.
+After running the program it will output the average height and dimension. Pick the smaller of the 2 to use as your training size
 #### Running ml_basic_predict.py
-To predict images in a directory (if you want to predict just a photo it must also be in the corresponding directory):
+To predict images in a directory (if you want to predict just a photo it must also be in the corresponding directory) make sure you have a h5 model available in the same working directory and change the following lines to your needs:
 - Line 31: Change PREDICT_DIR to folder relative path containing the images to predict. Ex: "\_base/prediction"
 - Lind 34: Set target_dim to the image prediction size for the model
 - Line 40: Change the relative path in load_model to a relative path containing the model you want to be tested if it is different.
 - Example: "ml_basic_tf_acc5.h5"
 - Ensure the model is an h5 file not a tflite file
 #### Running ml_basic_test.py
+To run a testing session make sure you have a h5 model available in the same working directory and change the following lines to your needs:
 - Line 13: Change TEST_DIR to a relative path containing the testing images
 - Line 15: Adjust image_dim to the imaage dimensions of the model if needed
 - Line 38: Change the relative path in load_model to a relative path containing the model you want to be tested if it is different.
 - Example: "ml_basic_tf_acc5.h5"
 - Ensure the model is an h5 file not a tflite file
+
+After changing the appropriate lines:
+1. Run the program
+2. The program will output the lost and accuracy of the testing
 #### Running ml_basic_tf.py
+To train your own model with different hyperparameters make sure you have an image dataset to train on and change the following lines of code:
 - Line 26: Change TRAIN_DIR to a relative path containing the training image data. Example: "\_base/training"
 - Line 27: Change VAL_DIR to a relative path containing the validation image data. Example: "\_base/validation"
 - Line 29: Change SAVE_DIR to a relative directory or absolute directory you would like to save the model to
@@ -83,7 +89,12 @@ To predict images in a directory (if you want to predict just a photo it must al
 - Line 37: Change epochs to the number of epochs you want the model to iterate over
 - Line 38: Change earlystop_patience
 - Line 39: Change reducelr_patience
+
+The paths for the directories need to be relative paths not absolute paths. Note that if you change the image dimension (image_dim) and produce your own model then all the files that require loading the model must have their image dimension parameter changed as well in order to work properly.
 #### Running ml_h5_to_tflite.py
-- Line 8:
-- Line 9:
+To convert an h5 model file change the following lines:
+- Line 8: Change input_filename to the relative path to the file.
+- Line 9: Change output_filename to the relative path of the output file to save as.
+
+Reminder, the paths need to be relative to the working directory and must include the filename at the end of the path so the model being loaded in must also be in the same directory as the program.
 ### Running the Android App
