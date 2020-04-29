@@ -42,15 +42,15 @@ The model implemented within the app is built upon the InceptionResNetV2 pretrai
 ## How to Run
 ### Running the Model Implementation
 #### Setting up the workspace
-It is recommended to use Visual Studio Code with Python installed for it. Python version must also be installed on your machine and be 3.6+ in order to work with the code provided.
+It is recommended to use Visual Studio Code with Python installed for it. Python must also be installed on your machine and be version 3.6+ in order to work with the code provided if you plan to use it through command line.
 The following libraries must also be download to work
 - tensorflow (Keras should come with tensorflow)
 - numpy
 - PIL
 
-Please make sure that you all this is properly installed in order to run the code.
+Please make sure that you all this is properly installed in order to run the code. Also make sure to download the appropriate dataset and a sample model as those are not included in this repository. A sample model is especially needed if you plan on testing or predicting with the model. Also pay close attention to when an absolute or relative path is required.
 #### Setting up the repository
-Clone the repository and place it in your preferred project space.
+Use github bash and clone the repository and place it in your preferred project space. Or you can download the whole repository and extract it from a zip into your preferred project space.
 #### Downloading the model
 To download a sample model to predict and test view this link:
 https://drive.google.com/drive/folders/1OD2z9ztrpB-JVjK30fnOF85GQiGl2coc?usp=sharing
@@ -60,8 +60,8 @@ Once the model file has been downloaded, place it in the keras_model folder prov
 To download the image dataset view this link:
 https://drive.google.com/open?id=1_aKkNb15ZWnGHbUpcpShYuiCSZleaH6J
 
-Once the \_base.zip file has been downloaded, extract it the keras_model folder provided in this repository. Or you may place it anywhere in your preferred directory. However, be aware you will need to adjust your paths in the python files to acommodate for the different image paths.
-
+Once the \_base.zip file has been downloaded, extract it the keras_model folder provided in this repository. The images must be in the working directory that contains all the program that require the images. The directories should be structured like this:
+working_directory(keras_model)/\_base/..
 #### Running ml_average_dimension.py
 To gather the average dimension of all the images in a directory please adjust the following lines:
 - Line 6: Change the directory to the absolute directory path containing the \_base folder that you extracted.
@@ -76,6 +76,8 @@ To predict images in a directory (if you want to predict just a photo it must al
 - Line 40: Change the relative path in load_model to a relative path containing the model you want to be tested if it is different.
 - Example: "ml_basic_tf_acc5.h5"
 - Ensure the model is an h5 file not a tflite file
+
+After running the model will output the image file name that has been worked on and the accuracy of the model while predicting that photo.
 #### Running ml_basic_test.py
 To run a testing session make sure you have a h5 model available in the same working directory and change the following lines to your needs:
 - Line 13: Change TEST_DIR to a relative path containing the testing images
