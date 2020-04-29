@@ -9,7 +9,6 @@ from tensorflow.keras.layers import BatchNormalization, Conv2D, MaxPooling2D, Dr
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import Sequential
 from tensorflow.keras import Model
-from tensorflow.keras.applications.vgg16 import VGG16
 from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 from tensorflow.keras.optimizers import SGD
@@ -26,8 +25,8 @@ from tensorflow.keras.losses import binary_crossentropy, categorical_crossentrop
 TRAIN_DIR='_base/training'
 VAL_DIR='_base/validation'
 
-SAVE_DIR = 'drive/My Drive/Projects/'
-FILENAME = 'ml_basic_tf_acc5'
+SAVE_DIR = 'example_output_directory/'
+FILENAME = 'ml_basic_tf_example_filename'
 
 # Image target dimensions
 image_dim = 352
