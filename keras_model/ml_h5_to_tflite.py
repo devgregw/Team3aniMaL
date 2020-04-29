@@ -5,8 +5,8 @@ import tensorflow as tf
 from tensorflow.keras import Model
 from tensorflow.keras.models import load_model
 
-input_filename = 'ml_basic_tf_acc.h5'
-output_filename = 'ml_basic_tf_acc.tflite'
+input_filename = 'ml_basic_tf_acc_example_input.h5'
+output_filename = 'ml_basic_tf_acc_example_output.tflite'
 
 model = load_model(input_filename)
 
