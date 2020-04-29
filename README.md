@@ -104,5 +104,5 @@ To convert an h5 model file change the following lines:
 - Line 8: Change input_filename to the relative path to the file.
 - Line 9: Change output_filename to the relative path of the output file to save as.
 
-Reminder, the paths need to be relative to the working directory and must include the filename at the end of the path so the model being loaded in must also be in the same directory as the program.
+Reminder, the paths need to be relative to the working directory and must include the filename at the end of the path so the model being loaded in must also be in the same directory as the program. Also the input file must be a h5 model with the h5 file extension explicitly. Likewise, the output file must have a tflite extension explicitly stated.
 ### Running the Android App
