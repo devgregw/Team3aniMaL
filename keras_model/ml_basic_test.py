@@ -11,7 +11,7 @@ from tensorflow.keras.models import load_model
 labels = ['bird', 'butterfly','cat', 'dog', 'horse', 'spider']
 
 # Directories for images
-TEST_DIR='_128/test_animals'
+TEST_DIR='_base/testing'
 # Image target dimensions
 image_dim = 352
 input_shape = (image_dim, image_dim)
@@ -36,7 +36,7 @@ print(test_data.class_indices)
 #--------------------------------------------------------------------------------------------------------------------------------
 # Model Testing
 #--------------------------------------------------------------------------------------------------------------------------------
-model = load_model('ml_basic_tf_acc3.h5')
+model = load_model('ml_basic_tf_acc5.h5')
 results =  model.evaluate(
     (item for item in test_data), 
     batch_size=batch_size,
