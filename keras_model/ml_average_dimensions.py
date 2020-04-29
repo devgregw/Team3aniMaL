@@ -10,8 +10,8 @@ print(path)
 import numpy as np
 from PIL import Image
 # Directories for images
-TRAIN_DIR='_base/train_animals'
-VAL_DIR='_base/val_animals'
+TRAIN_DIR='_base/training'
+VAL_DIR='_base/validation'
 
 count = 0
 width = 0
