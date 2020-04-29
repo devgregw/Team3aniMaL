@@ -23,7 +23,7 @@ The images used in this project for classification are obtained mainly through g
 - https://www.kaggle.com/c/dogs-vs-cats
 - http://www.vision.caltech.edu/visipedia/CUB-200-2011.html
 
-About 60,000 photos were obtained (unbalanced) for the classification process. For the balanced dataset, there were 36,000 images meaning 6,000 for each animal. The data was split 80/20 for validation.
+About 66,000 photos were obtained for the classification process. There were 60,000 photos used to train the model and 6,000 used to test the model. The images were supported as much as possible. However there may be some outliers that we were not able to catch due to time constraints.
 
 ## Files Included
 ### keras_model
@@ -33,7 +33,7 @@ About 60,000 photos were obtained (unbalanced) for the classification process. F
 - ml_h5_to_tflite.py: converts a Keras h5 file to a tflite file 
 - ml_average_dimensions.py: calculates the average dimension of all images in a directory
 ## Model
-The model implemented within the app is built upon the VGG16 pretrained model. It was able to obtain a validation accuracy above 95% and testing accuracy above 85%
+The model implemented within the app is built upon the InceptionResNetV2 pretrained model. It was able to obtain a validation accuracy above 95% and testing accuracy above 90%
 
 ## Tools Used
 - AdvancedRenamer: useful for renaming large batches of files
@@ -41,13 +41,21 @@ The model implemented within the app is built upon the VGG16 pretrained model. I
 
 ## How to Run
 ### Running the Model Implementation
+#### Setting up the workspace
+It is recommended to use Visual Studio Code with Python installed for it. Python version must also be installed on your machine and be 3.6+ in order to work with the code provided.
+The following libraries must also be download to work
+- tensorflow (Keras should come with tensorflow)
+- numpy
+- PIL
+
+Please make sure that you all this is properly installed in order to run the code.
 #### Setting up the repository
 Clone the repository and place it in your preferred project space.
 #### Downloading the model
 To download a sample model to predict and test view this link:
 https://drive.google.com/drive/folders/1OD2z9ztrpB-JVjK30fnOF85GQiGl2coc?usp=sharing
 
-Once the model file has been downloaded, place it in the keras_model folder provided in this repository.
+Once the model file has been downloaded, place it in the keras_model folder provided in this repository. It must be in the same directory as the programs that require it.
 #### Downloading the images
 To download the image dataset view this link:
 https://drive.google.com/open?id=1_aKkNb15ZWnGHbUpcpShYuiCSZleaH6J
