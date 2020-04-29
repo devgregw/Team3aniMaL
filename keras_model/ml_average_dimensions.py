@@ -3,7 +3,7 @@
 # Description: Used to determine the average sizes of images in the training and validation directory
 import os
 from os import listdir
-os.chdir('C:\\Users\\jonah_000\\Dropbox')
+os.chdir('C:\\Users\\examplepath\\example_workingdirectory')
 path = os.getcwd()
 print(path)
 
