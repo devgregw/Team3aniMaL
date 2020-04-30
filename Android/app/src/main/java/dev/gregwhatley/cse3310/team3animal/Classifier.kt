@@ -25,6 +25,7 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.File
 import java.io.FileInputStream
 import java.lang.Exception
+import java.lang.IllegalArgumentException
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.text.SimpleDateFormat
@@ -80,6 +81,10 @@ class Classifier(private val activity: AppCompatActivity) {
 
     private fun classifyWorker(bitmap: Bitmap): SortedMap<Float, String>? {
         try {
+            // Throw if size of more than 50MB
+            if (bitmap.byteCount > 50000000)
+                throw IllegalArgumentException("classifyWorker bitmap must be less than 50MB in size")
+
             // Create an image processor to resize and normalize the image.
             val processor = ImageProcessor.Builder()
                 .add(ResizeOp(inputHeight, inputWidth, ResizeOp.ResizeMethod.BILINEAR))
