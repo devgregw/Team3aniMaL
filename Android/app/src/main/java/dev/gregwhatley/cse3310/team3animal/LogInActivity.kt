@@ -34,10 +34,15 @@ class LogInActivity : AppCompatActivity() {
                 .setMessage("Enter the email address you used to register:")
                 .setView(forgotEmail)
                 .setPositiveButton("Next") { _, _ ->
-                    FirebaseAuth.getInstance().sendPasswordResetEmail(forgotEmail.text.toString()).addOnCompleteListener {
-                        if (it.exception != null)
-                            Log.e("PWD", it.exception!!.message, it.exception!!)
-                        Snackbar.make(forgot, if (it.isSuccessful) "Check your email for a password reset link." else (if (it.exception is FirebaseAuthInvalidUserException) "A user with this email address doesn't exist." else "Unable to complete your request."), Snackbar.LENGTH_SHORT).show()
+                    try {
+                        FirebaseAuth.getInstance().sendPasswordResetEmail(forgotEmail.text.toString()).addOnCompleteListener {
+                            if (it.exception != null)
+                                Log.e("PWD", it.exception!!.message, it.exception!!)
+                            Snackbar.make(forgot, if (it.isSuccessful) "Check your email for a password reset link." else (if (it.exception is FirebaseAuthInvalidUserException) "A user with this email address doesn't exist." else "Unable to complete your request."), Snackbar.LENGTH_SHORT).show()
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Snackbar.make(forgot, "Unable to complete your request.", Snackbar.LENGTH_SHORT).show()
                     }
                 }
                 .setNegativeButton("Cancel", null)
