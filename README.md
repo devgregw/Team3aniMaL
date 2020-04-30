@@ -62,34 +62,36 @@ https://drive.google.com/open?id=1_aKkNb15ZWnGHbUpcpShYuiCSZleaH6J
 
 Once the \_base.zip file has been downloaded, extract it the keras_model folder provided in this repository. The images must be in the working directory that contains all the program that require the images. The directories should be structured like this:
 working_directory(keras_model)/\_base/..
-#### Running ml_average_dimension.py
+#### Setting up ml_average_dimension.py
 To gather the average dimension of all the images in a directory please adjust the following lines:
 - Line 6: Change the directory to the absolute directory path containing the \_base folder that you extracted.
 - Line 13: Ensure TRAIN_DIR is set to "\_base/training"
 - Line 14: Ensure VAL_DIR is set to "\_base/validation"
-
-After running the program it will output the average height and dimension. Pick the smaller of the 2 to use as your training size
-#### Running ml_basic_predict.py
+#### Running ml_average_dimension.py
+1. In visual studio code with python installed you can simply click the run button to execute the file.
+2. Program outputs the average height and width dimensions. Pick the smaller of the 2 to use as image size.
+#### Setting up ml_basic_predict.py
 To predict images in a directory (if you want to predict just a photo it must also be in the corresponding directory) make sure you have a h5 model available in the same working directory and change the following lines to your needs:
 - Line 31: Change PREDICT_DIR to folder relative path containing the images to predict. Ex: "\_base/prediction"
 - Lind 34: Set target_dim to the image prediction size for the model
 - Line 40: Change the relative path in load_model to a relative path containing the model you want to be tested if it is different.
 - Example: "ml_basic_tf_acc5.h5"
 - Ensure the model is an h5 file not a tflite file
-
-After running the model will output the image file name that has been worked on and the accuracy of the model while predicting that photo.
-#### Running ml_basic_test.py
+#### Running ml_basic_predict.py
+1. In visual studio code with python installed you can simply click the run button to execute the file.
+2. The program will output the accuracy of each image file in the directory alongside the prediciton the model made.
+#### Setting up ml_basic_test.py
 To run a testing session make sure you have a h5 model available in the same working directory and change the following lines to your needs:
 - Line 13: Change TEST_DIR to a relative path containing the testing images
 - Line 15: Adjust image_dim to the imaage dimensions of the model if needed
 - Line 38: Change the relative path in load_model to a relative path containing the model you want to be tested if it is different.
 - Example: "ml_basic_tf_acc5.h5"
 - Ensure the model is an h5 file not a tflite file
-
-After changing the appropriate lines:
-1. Run the program
-2. The program will output the lost and accuracy of the testing
-#### Running ml_basic_tf.py
+#### Running ml_basic_test.py
+1. Prepare an h5 model in the working directory to be loaded into the program.
+2. In visual studio code with python installed you can simply click the run button to execute the file.
+3. The program will output the loss and accuracy of the model testing session.
+#### Setting up ml_basic_tf.py
 To train your own model with different hyperparameters make sure you have an image dataset to train on and change the following lines of code:
 - Line 26: Change TRAIN_DIR to a relative path containing the training image data. Example: "\_base/training"
 - Line 27: Change VAL_DIR to a relative path containing the validation image data. Example: "\_base/validation"
@@ -99,14 +101,21 @@ To train your own model with different hyperparameters make sure you have an ima
 - Line 37: Change epochs to the number of epochs you want the model to iterate over
 - Line 38: Change earlystop_patience
 - Line 39: Change reducelr_patience
-
 The paths for the directories need to be relative paths not absolute paths. Note that if you change the image dimension (image_dim) and produce your own model then all the files that require loading the model must have their image dimension parameter changed as well in order to work properly.
-#### Running ml_h5_to_tflite.py
+#### Running ml_basic_tf.py
+1. Make sure to have the image dataset in the proper directory stucture before feeding it into the model.
+2. In visual studio code with python installed you can simply click the run button to execute the file.
+3. The program will ouput the summary of the model and info about each epoch.
+4. The program will produce a CSV file with all epochs logged, an h5 file, and a tflite file (if all epochs are completed).
+#### Setting up ml_h5_to_tflite.py
 To convert an h5 model file change the following lines:
 - Line 8: Change input_filename to the relative path to the file.
 - Line 9: Change output_filename to the relative path of the output file to save as.
-
 Reminder, the paths need to be relative to the working directory and must include the filename at the end of the path so the model being loaded in must also be in the same directory as the program. Also the input file must be a h5 model with the h5 file extension explicitly. Likewise, the output file must have a tflite extension explicitly stated.
+#### Running ml_h5_to_tflite.py
+1. Prepare an h5 model in the working directory to be loaded into the program.
+2. In visual studio code with python installed you can simply click the run button to execute the file.
+3. The program will ouput a tflite file from the h5 file.
 
 ---
 
