@@ -51,17 +51,22 @@ The following libraries must also be download to work
 Please make sure that you all this is properly installed in order to run the code. Also make sure to download the appropriate dataset and a sample model as those are not included in this repository. A sample model is especially needed if you plan on testing or predicting with the model. Also pay close attention to when an absolute or relative path is required.
 #### Setting up the repository
 Use github bash and clone the repository and place it in your preferred project space. Or you can download the whole repository and extract it from a zip into your preferred project space.
+
+When I mention the current working directory of the project I am refering to the "keras_model" folder not the directory that contains both the android and keras projects.
 #### Downloading the model
 To download a sample model to predict and test view this link:
 https://drive.google.com/drive/folders/1OD2z9ztrpB-JVjK30fnOF85GQiGl2coc?usp=sharing
 
 Once the model file has been downloaded, place it in the keras_model folder provided in this repository. It must be in the same directory as the programs that require it.
+Example: keras_model/ml_basic_model.h5
 #### Downloading the images
 To download the image dataset view this link:
 https://drive.google.com/open?id=1_aKkNb15ZWnGHbUpcpShYuiCSZleaH6J
 
 Once the \_base.zip file has been downloaded, extract it the keras_model folder provided in this repository. The images must be in the working directory that contains all the program that require the images. The directories should be structured like this:
-working_directory(keras_model)/\_base/..
+keras_model/\_base/..
+
+\_base should contains 4 subdirectories: training, validation, testing, and prediction. For training, validation and testing they include their own subdirectories: bird, butterfly, cat, dog, horse, spider. The "prediction" folder will hold just images without folders that label them.
 #### Setting up ml_average_dimension.py
 To gather the average dimension of all the images in a directory please adjust the following lines:
 - Line 6: Change the directory to the absolute directory path containing the \_base folder that you extracted.
