@@ -107,4 +107,20 @@ To convert an h5 model file change the following lines:
 - Line 9: Change output_filename to the relative path of the output file to save as.
 
 Reminder, the paths need to be relative to the working directory and must include the filename at the end of the path so the model being loaded in must also be in the same directory as the program. Also the input file must be a h5 model with the h5 file extension explicitly. Likewise, the output file must have a tflite extension explicitly stated.
+
+---
+
 ### Running the Android App
+#### Importing the Project into Android Studio
+1. Open Android Studio.
+2. Click "Open an Existing Android Studio project".
+3. Navigate to the root folder of the Android project and click "Open".
+4. Wait for Gradle sync and indexing to complete.
+#### Compiling the App
+1. In Android Studio, use the Device menu or click Run > Select Device... to select a connected Android device or emulator running at least Android 7.0 Nougat (API Level 24).
+2. Click the Run button to compile and start debugging on the selected device or emulator.
+#### Using the App
+1. Launch the app on your selected device or emulator.
+2. Log in or create an account.
+3. On the home screen, tap the large orange button in the center to select a photo from your camera, internal storage, gallery, or a third-party app.
+4. After capturing or selecting an image, crop it to ensure that unnecessary details are removed and that the subject is clearly visible.
