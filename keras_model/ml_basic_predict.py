@@ -10,8 +10,6 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import load_model
 
-
-
 # Used to find model labels for a prediction by finding the highest number in
 # an array holding the models prediction
 def findIndex(array):
@@ -59,9 +57,3 @@ for image in listdir(PREDICT_DIR):
     for num in prediction:
         print(f'{labels[i]:10s}: {num:2.8f}')
         i+=1
-
-
-
-
-
-
