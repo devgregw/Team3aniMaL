@@ -3,7 +3,6 @@
 # Purpose: Used to test model by feeding in a directory of images sorted in subdirectories
 import os
 
-# Enable AMD GPU usage w/ Keras
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import load_model
@@ -43,6 +42,3 @@ results =  model.evaluate(
     steps=test_size// batch_size
 )
 print(f'{model.metrics_names}{results}')
-
-
-
